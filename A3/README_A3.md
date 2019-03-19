@@ -40,3 +40,17 @@ Your pull request should include the following:
 * your program (source code)
 * wheight of the longest path for your input files (one for dim 10, and one for dim 999, respectively)
 * let me know which input file you selected (via writing the file name in you ping message, e.g. `@mtw please review rmHV_10_5`)
+
+n*m sind die knoten
+n*(n-1) sind kanten
+
+die 2 matrizen geben die kantengewichte an (für nach unten und nach rechts)
+im repo sind 10x10 und 999x999 matrizen. für beide größen 1 problem lösen.
+tab-separiert und --- zum trennen der matrizen.
+
+tool soll funktionieren, ohne die größe vom input file zu kennen.
+über STDIN einlesen. die größenangabe der matrix soll nicht geparst werden! anhand der zahlenanzahl die dimension erkennen. parsen ab zeile 2. while schleife
+mht.py < rand10.1
+lösung: teuerster Pfad von links oben nach rechts unten. Output soll die Summe der kantengewichte sein.
+
+welches inputfile wir verwendet haben und das Ergebnis sollen in den @mtw review kommentar rein.
