@@ -9,7 +9,35 @@
 using namespace std;
 
 string Angabe;
+class Matrix {
+    private:
+        int werteanz;
+        int spaltenanz;
+        int zeilenanz;
 
+    public:
+        int getWerteanz() {
+            return werteanz;
+        }
+        int getSpaltenanz() {
+            return spaltenanz;
+        }
+        int getZeilenanz() {
+            return zeilenanz;
+        }
+
+        void setZeilenanz(int za) {
+            zeilenanz = za;
+        }
+
+        void setSpaltenanz(int sa) {
+            spaltenanz = sa;
+        }
+        void setWerteanz(int wa) {
+            werteanz = wa;
+        }
+
+};
 
 void read_in() { // string read_in(string filename) {
         ifstream input_file ("rmHV_10_12"); //  ifstream input_file (filename);
@@ -23,8 +51,34 @@ void read_in() { // string read_in(string filename) {
 }
 
 
+
+Matrix gibmireins(string Angabe) {
+
+    //hier werden zeilenanz etc berechnet....
+    
+    Matrix m;
+    m.setSpaltenanz(1);
+    m.setSpaltenanz(1);
+
+    return m;
+}
+
+
+
 int main() {
     
+
+
+    Matrix m;
+    m.setSpaltenanz(1);
+    m.getSpaltenanz();
+    
+
+    cout << "Spaltenanz: " << gibmireins("blah!").getZeilenanz();
+
+
+
+
     // string eingabe;
     // cin >> eingabe;
     // string Angabe;
