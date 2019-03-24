@@ -111,20 +111,28 @@ int main() {
     float matrix1[number_rows_matrix1][number_columns_matrix1];
     float matrix2[number_rows_matrix2][number_columns_matrix2];
     
-    // matrix 1    
-    for (int c = 0; c < 90; c++) {
-        if (Angabe[c] == '.') {
-            char ch1 = Angabe[c-1];
-            char ch2 = Angabe[c];
-            char ch3 = Angabe[c+1];
-            char ch4 = Angabe[c+2];
+    // matrix 1   
+    int cursor = 0;
+    for (int y = 0; y < number_rows_matrix1; y++) {
+        for (int x = 0; x < number_columns_matrix1; x++) {
+            while (Angabe[cursor] != 46) {
+                cursor ++;
+                
+            }
+            
+            char ch1 = Angabe[cursor - 1];
+            char ch2 = Angabe[cursor];
+            char ch3 = Angabe[cursor + 1];
+            char ch4 = Angabe[cursor + 2];
             string value;
             value += ch1;
             value += ch2; 
             value += ch3;
             value += ch4;
             float float_value = stof(value);
-            cout << float_value << endl;
+            matrix1[x][y] = float_value;
+            cursor ++;   
         }
-    }
+    } 
+    
 }
