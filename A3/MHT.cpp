@@ -17,6 +17,8 @@ class Matrix {
         int spaltenanz;
         int zeilenanz;
         float* matrix_values;
+        float* matrix_nodes;
+        int knotenanz;
        
     public:
         int getWerteanz() {
@@ -30,7 +32,16 @@ class Matrix {
         }
         float getMatrixValue(int x, int y) {
             return matrix_values[y * spaltenanz + x];
+        } 
+        float getMatrixNode(int x, int y) {
+            return matrix_nodes[y * spaltenanz + x];
         }
+        float getKnotenanz(){
+            return knotenanz;
+        }
+         
+
+
 
         void setZeilenanz(int za) {
             zeilenanz = za;
@@ -46,14 +57,22 @@ class Matrix {
         }
         void setMatrixValue(int x, int y, float value) {
             matrix_values[y * spaltenanz + x] = value;
+        }   
+        void setMatrixNodes(int x, int y, float node_sum) {
+            matrix_nodes[y * spaltenanz + x] = node_sum;
         }
+        void setKnotenanz(int sa, int za){
+            knotenanz = sa * za;
+        }
+       
+         
 
         void dimensions_matrix1(string Angabe) {
 
             int number_values_matrix1 = 0;
             int number_rows_matrix1 = 0;
                 
-            for (int k = 0; k < Angabe.length(); k++) {  // 45 = -, 46 = .
+            for (int k = 0; k < Angabe.length(); k++) {  // 45 = -, 46 = .  {}  []
                 if (Angabe[k] == 46) {
                     number_values_matrix1 += 1;
                 } 
@@ -134,12 +153,20 @@ int main() {
     //cout << "Spalten: " << m2.getSpaltenanz() << " und Reihen: " << m2.getZeilenanz() << endl;
 
     fill_matrix(m1, cursor, Angabe);
-    cout << m1.getMatrixValue(9,8) << endl; // letzt Koordinate bei 9,8
-    cout << "cursor: " << cursor << endl; // cursor am schluss bei 648
+    //cout << m1.getMatrixValue(9,8) << endl; // letzt Koordinate bei 9,8
+    //cout << "cursor: " << cursor << endl; // cursor am schluss bei 648
 
     fill_matrix(m2, cursor, Angabe);
-    cout << m2.getMatrixValue(7,7) << endl; // letzte Koordinate bei 
-    cout << "cursor: " << cursor << endl; // cursor am schluss bei 1306
+    //cout << m2.getMatrixValue(7,7) << endl; // letzte Koordinate bei 
+    //cout << "cursor: " << cursor << endl; // cursor am schluss bei 1306
+
+    Matrix Knoten;
+    Knoten.setSpaltenanz(m1.getSpaltenanz());
+    Knoten.setZeilenanz(m2.getZeilenanz());
+    Knoten.setKnotenanz(Knoten.getZeilenanz(), Knoten.getSpaltenanz());
+    cout << " spalten: " << Knoten.getSpaltenanz() << " und Zeilen: " << Knoten.getZeilenanz() << "Knoten " << Knoten.getKnotenanz() << endl;
+
 }
+
 
 
