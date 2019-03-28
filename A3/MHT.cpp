@@ -66,7 +66,7 @@ class Matrix {
             }
             number_rows_matrix1 -= 1;
             
-            spaltenanz = number_values_matrix1 / number_rows_matrix1;   // spalten = Werte / Reihen        
+            spaltenanz = number_values_matrix1 / number_rows_matrix1;       
             zeilenanz = number_rows_matrix1;
             matrix_values = new float[zeilenanz * spaltenanz];
         }
@@ -137,6 +137,9 @@ int main() {
     cout << m1.getMatrixValue(9,8) << endl; // letzt Koordinate bei 9,8
     cout << "cursor: " << cursor << endl; // cursor am schluss bei 648
 
+    fill_matrix(m2, cursor, Angabe);
+    cout << m2.getMatrixValue(7,7) << endl; // letzte Koordinate bei 
+    cout << "cursor: " << cursor << endl; // cursor am schluss bei 1306
 }
 
 
