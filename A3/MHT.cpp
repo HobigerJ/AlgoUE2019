@@ -90,6 +90,37 @@ string read_in(string filename) {
        
 }
 
+int cursor = 0;
+
+
+// dieser funktion muss eine Matrix(also die dimensionen der matrix) und der momentane cursor übergeben werden
+// returnen soll sie den neuen cursorstand 
+  
+int fill_matrix(Matrix m, int &cursor, string Angabe) {
+    for (int y = 0; y < m.getZeilenanz(); y++) {
+        for (int x = 0; x < m.getSpaltenanz(); x++) {
+            while (Angabe[cursor] != 46) {
+                cursor ++;                
+            }            
+            char ch1 = Angabe[cursor - 1];
+            char ch2 = Angabe[cursor];
+            char ch3 = Angabe[cursor + 1];
+            char ch4 = Angabe[cursor + 2];
+            string value;
+            value += ch1;
+            value += ch2; 
+            value += ch3;
+            value += ch4;
+            float float_value = stof(value);
+            m.setMatrixValue(x,y,float_value);
+            cursor ++;   
+        }
+    }
+
+    return cursor;
+
+} 
+
 int main() { 
 
     Matrix m1;
@@ -101,28 +132,11 @@ int main() {
     m2.dimensions_matrix2(m1);
     //cout << "Matrix 2" << endl;
     //cout << "Spalten: " << m2.getSpaltenanz() << " und Reihen: " << m2.getZeilenanz() << endl;
-  
-       
-    int cursor = 0;
-    for (int y = 0; y < m1.getZeilenanz(); y++) {
-        for (int x = 0; x < m1.getSpaltenanz(); x++) {
-            while (Angabe[cursor] != 46) {
-                cursor ++;                
-            }
-            
-            char ch1 = Angabe[cursor - 1];
-            char ch2 = Angabe[cursor];
-            char ch3 = Angabe[cursor + 1];
-            char ch4 = Angabe[cursor + 2];
-            string value;
-            value += ch1;
-            value += ch2; 
-            value += ch3;
-            value += ch4;
-            float float_value = stof(value);
-            m1.setMatrixValue(x,y,float_value);   // m1.setMatrixValues(x, y, float_value);
-            cursor ++;   
-        }
-    } cout << m1.getMatrixValue(3,2) << endl;
-    
+
+    fill_matrix(m1, cursor, Angabe);
+    cout << m1.getMatrixValue(9,8) << endl; // letzt Koordinate bei 9,8
+    cout << "cursor: " << cursor << endl; // cursor am schluss bei 648
+
 }
+
+
