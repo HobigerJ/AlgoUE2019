@@ -18,7 +18,7 @@ class Matrix {
         int zeilenanz;
         float* matrix_values;
         float* matrix_nodes;
-        int knotenanz;
+        float* knoten_values;
        
     public:
         int getWerteanz() {
@@ -36,11 +36,10 @@ class Matrix {
         float getMatrixNode(int x, int y) {
             return matrix_nodes[y * spaltenanz + x];
         }
-        float getKnotenanz(){
-            return knotenanz;
+   
+        float getknotenValue(int x, int y) {
+            return knoten_values[y * spaltenanz + x];
         }
-         
-
 
 
         void setZeilenanz(int za) {
@@ -61,13 +60,11 @@ class Matrix {
         void setMatrixNodes(int x, int y, float node_sum) {
             matrix_nodes[y * spaltenanz + x] = node_sum;
         }
-        void setKnotenanz(int sa, int za){
-            knotenanz = sa * za;
-        }
-       
+        void setknotenValue(int x, int y, float value) {
+            knoten_values[y * spaltenanz + x] = value;    
          
-
-        void dimensions_matrix1(string Angabe) {
+        }
+        void dimensions_matrix_down(string Angabe) {
 
             int number_values_matrix1 = 0;
             int number_rows_matrix1 = 0;
@@ -87,13 +84,15 @@ class Matrix {
             
             spaltenanz = number_values_matrix1 / number_rows_matrix1;       
             zeilenanz = number_rows_matrix1;
-            matrix_values = new float[zeilenanz * spaltenanz];
+            //matrix_values = new float[zeilenanz * spaltenanz];
+            setDimensions();  
         }
 
-        void dimensions_matrix2(Matrix m) {
+        void dimensions_matrix_right(Matrix m) {
             spaltenanz = m.getSpaltenanz() - 1;
             zeilenanz = m.getZeilenanz() + 1;
-            matrix_values = new float[zeilenanz * spaltenanz];    
+            //matrix_values = new float[zeilenanz * spaltenanz];  
+            setDimensions();  
         }
 
 };
@@ -110,10 +109,6 @@ string read_in(string filename) {
 }
 
 int cursor = 0;
-
-
-// dieser funktion muss eine Matrix(also die dimensionen der matrix) und der momentane cursor übergeben werden
-// returnen soll sie den neuen cursorstand 
   
 int fill_matrix(Matrix m, int &cursor, string Angabe) {
     for (int y = 0; y < m.getZeilenanz(); y++) {
@@ -142,31 +137,57 @@ int fill_matrix(Matrix m, int &cursor, string Angabe) {
 
 int main() { 
 
-    Matrix m1;
-    m1.dimensions_matrix1(read_in("rmHV_10_12"));   
+    Matrix down_edges;
+    down_edges.dimensions_matrix_down(read_in("rmHV_10_12"));   
     //cout << "Matrix 1" << endl;
-    //cout << "Spaltenanz: " << m1.getSpaltenanz() << " und Reihenanz: " << m1.getZeilenanz() << endl;
+    //cout << "Spaltenanz: " << down_edges.getSpaltenanz() << " und Reihenanz: " << down_edges.getZeilenanz() << endl;
 
-    Matrix m2;
-    m2.dimensions_matrix2(m1);
+    Matrix right_edges;
+    right_edges.dimensions_matrix_right(down_edges);
     //cout << "Matrix 2" << endl;
-    //cout << "Spalten: " << m2.getSpaltenanz() << " und Reihen: " << m2.getZeilenanz() << endl;
+    //cout << "Spalten: " << right_edges.getSpaltenanz() << " und Reihen: " << right_edges.getZeilenanz() << endl;
 
-    fill_matrix(m1, cursor, Angabe);
-    //cout << m1.getMatrixValue(9,8) << endl; // letzt Koordinate bei 9,8
+    fill_matrix(down_edges, cursor, Angabe);
+    //cout << down_edges.getMatrixValue(9,8) << endl; // letzt Koordinate bei 9,8
     //cout << "cursor: " << cursor << endl; // cursor am schluss bei 648
 
-    fill_matrix(m2, cursor, Angabe);
-    //cout << m2.getMatrixValue(7,7) << endl; // letzte Koordinate bei 
+    fill_matrix(right_edges, cursor, Angabe);
+    //cout << right_edges.getMatrixValue(7,7) << endl; // letzte Koordinate bei 
     //cout << "cursor: " << cursor << endl; // cursor am schluss bei 1306
 
-    Matrix Knoten;
-    Knoten.setSpaltenanz(m1.getSpaltenanz());
-    Knoten.setZeilenanz(m2.getZeilenanz());
-    Knoten.setKnotenanz(Knoten.getZeilenanz(), Knoten.getSpaltenanz());
-    cout << " spalten: " << Knoten.getSpaltenanz() << " und Zeilen: " << Knoten.getZeilenanz() << "Knoten " << Knoten.getKnotenanz() << endl;
+    cout << ":" << right_edges.getMatrixValue(0,0) << endl;
+    
+    Matrix knoten;
+    knoten.setSpaltenanz(down_edges.getSpaltenanz());
+    knoten.setZeilenanz(right_edges.getZeilenanz());
+    knoten.setDimensions();
+    cout << " spalten: " << knoten.getSpaltenanz() << " und Zeilen: " << knoten.getZeilenanz() << endl;
+
+
+    int value = 0;
+    knoten.getknotenValue(0,0);
+    //cout << knoten.getknotenValue(1,1);
+    /*
+    for (int y = 1; y < knoten.getSpaltenanz(); y++) {  //
+        value = knoten.getknotenValue(0,y-1);
+        cout << value << ", " << endl;
+        
+        /*knoten.setknotenValue(0,y, value);
+        cout << knoten.getknotenValue(0,y) << ", " << endl;*/
+    
+
+
+/*
+    for (int y = 0; y < knoten.getZeilenanz(); y++) {
+        for (int x = 0; x < knoten.getSpaltenanz(); x++) {
+        }
+    }*/
 
 }
+
+
+    
+
 
 
 
