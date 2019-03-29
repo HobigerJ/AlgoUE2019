@@ -5,11 +5,12 @@
 #include <sstream>
 #include <ctime>
 #include <typeinfo>
+#include <algorithm>
 
 using namespace std;
 
 string read_in(string filename);
-string Angabe = read_in("rmHV_10_12");
+string Angabe = read_in("rmHV_999_12");
 
 class Matrix {
     private:
@@ -123,7 +124,7 @@ int fill_matrix(Matrix m, int &cursor, string Angabe) {
 int main() { 
 
     Matrix down_edges;
-    down_edges.dimensions_matrix_down(read_in("rmHV_10_12"));   
+    down_edges.dimensions_matrix_down(read_in("rmHV_999_12"));   
     //cout << "Matrix 1" << endl;
     //cout << "Spaltenanz: " << down_edges.getSpaltenanz() << " und Reihenanz: " << down_edges.getZeilenanz() << endl;
 
@@ -169,11 +170,19 @@ int main() {
             }
     }
 
-/*
-    for (int y = 0; y < knoten.getZeilenanz(); y++) {
-        for (int x = 0; x < knoten.getSpaltenanz(); x++) {
+    float value1 = 0;
+    float value2 = 0;
+    float max_value = 0;
+    for (int y = 0; y < knoten.getSpaltenanz(); y++) {
+        for (int x = 0; x < knoten.getZeilenanz(); x++) {
+            value1 = knoten.getValue(y-1,x) + down_edges.getValue(y,x);
+            value2 = knoten.getValue(y, x-1) + right_edges.getValue(y,x);
+            max_value = max(value1, value2);
+            knoten.setValue(y,x, max_value);
         }
-    }*/
+    }
+
+    cout << "maximale kantenlaenge: " << knoten.getValue(998,998) << endl; // 17.3
 
 }
 
