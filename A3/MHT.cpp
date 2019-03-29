@@ -147,19 +147,27 @@ int main() {
     //cout << " spalten: " << knoten.getSpaltenanz() << " und Zeilen: " << knoten.getZeilenanz() << endl;
 
 
-    int value = 0;
-    knoten.setValue(1,1, 0.5);
-    cout << knoten.getValue(1,1);
-    //cout << knoten.getknotenValue(1,1);
-    /*
-    for (int y = 1; y < knoten.getSpaltenanz(); y++) {  //
-        value = knoten.getknotenValue(0,y-1);
-        cout << value << ", " << endl;
-        
-        /*knoten.setknotenValue(0,y, value);
-        cout << knoten.getknotenValue(0,y) << ", " << endl;*/
+    float value = 0.0;    
     
+    for (int y = 0; y < knoten.getSpaltenanz(); y++) {
+        if (y == 0){
+            knoten.setValue(0,0, 0.0);
+        } else {
+            value = knoten.getValue(0,y-1) + down_edges.getValue(0,y-1);
+            knoten.setValue(0,y, value);
+            cout << knoten.getValue(0,y) << ", " << endl;
+            }
+    }
 
+    for (int x = 0; x < knoten.getZeilenanz(); x++) {
+        if (x == 0){
+            knoten.setValue(0,0, 0.0);
+        } else {
+            value = knoten.getValue(x-1,0) + right_edges.getValue(x-1,0);
+            knoten.setValue(x,0, value);
+            cout << knoten.getValue(x,0) << ", " << endl;
+            }
+    }
 
 /*
     for (int y = 0; y < knoten.getZeilenanz(); y++) {
